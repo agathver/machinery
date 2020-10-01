@@ -1,0 +1,31 @@
+id: 'create-vm'
+name: 'Create EC2 instance'
+description: 'Create EC2 Virtual Machine'
+image: 'docker.io/alpine:latest'
+shell: 'sh'
+shell_args:
+  - '-u'
+env_vars:
+  - 'FOO=BAR'
+script:
+  - 'export'
+parameters:
+  - id: 'type'
+    name: 'EC2 Instance Type'
+    description: 'EC2 Instance Type'
+    required: true
+    type: 'choice'
+    choices:
+      - value: 't2-micro'
+        name: 'T2 Micro'
+        description: 'T2 micro (1 CPU, 1 GB) burstable'
+      - value: 'c5-large'
+        name: 'C5 Large'
+        description: 'C5 Large compute-optimized'
+  - id: 'host'
+    name: 'Port'
+    description: 'DNS Name'
+    required: false
+    type: 'string'
+    pattern: '^(?:[[:alnum:]][[:alnum:]\-]*[[:alnum:]]\.?)+$'
+    error_message: 'Provide a valid DNS name'

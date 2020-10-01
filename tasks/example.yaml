@@ -1,0 +1,26 @@
+id: 'redis-cli-info'
+name: 'Redis server info'
+description: 'Get redis server info'
+image: 'docker.io/redis:latest'
+shell: 'sh'
+shell_args:
+  - '-u'
+env_vars:
+  - 'FOO=BAR'
+script:
+  - 'echo $FOO'
+  - 'export'
+  - 'redis-cli -h $HOST -p $PORT info'
+parameters:
+  - id: 'host'
+    name: 'Host'
+    description: 'Redis host IP address or DNS name'
+    required: true
+    type: 'string'
+    pattern: '^(?:[[:alnum:]][[:alnum:]\-]*[[:alnum:]]\.?)+$'
+    error_message: 'Provide a valid DNS name or IPv4 address'
+  - id: 'port'
+    name: 'Port'
+    description: 'Redis server port'
+    required: false
+    type: 'int'
