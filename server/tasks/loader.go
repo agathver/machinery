@@ -9,7 +9,7 @@ import (
 )
 
 func Load(dir string) ([]Task, error) {
-	var tasks []Task
+	tasks := make([]Task, 0)
 
 	files, err := ioutil.ReadDir(dir)
 
@@ -31,11 +31,7 @@ func Load(dir string) ([]Task, error) {
 		tasks = append(tasks, task)
 	}
 
-	if tasks != nil {
-		return tasks, nil
-	} else {
-		return []Task{}, nil
-	}
+	return tasks, nil
 }
 
 func isYAML(name string) bool {

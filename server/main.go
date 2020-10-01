@@ -20,9 +20,9 @@ func main() {
 
 	taskController := controllers.NewTaskController(taskList)
 
-	server.GET("/tasks", taskController.List)
-	server.GET("/tasks/:id", taskController.Get)
-	server.POST("/tasks/:id/execute", taskController.Execute)
+	server.GET("/v1/tasks", taskController.List)
+	server.GET("/v1/tasks/:id", taskController.Get)
+	server.POST("/v1/tasks/:id/execute", taskController.Execute)
 
 	utils.Must(server.Run(cfg.ListenAddress()))
 }
