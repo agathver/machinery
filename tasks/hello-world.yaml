@@ -1,0 +1,4 @@
+id: 'hello-world'
+name: 'Hello World'
+description: 'Prints hello world'
+image: 'docker.io/library/hello-world:latest'

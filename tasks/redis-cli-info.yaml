@@ -2,12 +2,8 @@ id: 'redis-cli-info'
 name: 'Redis server info'
 description: 'Get redis server info'
 image: 'docker.io/redis:latest'
-shell: 'sh'
-shell_args:
-  - '-u'
 env_vars:
   - 'FOO=BAR'
-script:
   - 'echo $FOO'
   - 'export'
   - 'redis-cli -h $HOST -p $PORT info'

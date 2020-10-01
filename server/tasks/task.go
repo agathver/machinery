@@ -22,9 +22,6 @@ type Task struct {
 	Name        string
 	Description string
 	Image       string
-	Shell       string
-	ShellArgs   []string `yaml:"shell_args"`
 	EnvVars     []string `yaml:"env_vars"`
-	Script      []string
 	Parameters  []Parameters
 }

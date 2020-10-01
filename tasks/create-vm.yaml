@@ -2,13 +2,8 @@ id: 'create-vm'
 name: 'Create EC2 instance'
 description: 'Create EC2 Virtual Machine'
 image: 'docker.io/alpine:latest'
-shell: 'sh'
-shell_args:
-  - '-u'
 env_vars:
   - 'FOO=BAR'
-script:
-  - 'export'
 parameters:
   - id: 'type'
     name: 'EC2 Instance Type'
