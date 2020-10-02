@@ -14,5 +14,9 @@
     &:nth-child(n + 3) {
       border-right: none;
     }
+
+    &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+      border-top: none;
+    }
   }
 }
