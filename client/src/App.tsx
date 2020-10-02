@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
-import {Router} from "@reach/router";
+import {Redirect, Router} from "@reach/router";
 import TaskList from "./components/TaskList";
+import {TaskDetails} from "./components/TaskDetails";
 
 
 function App() {
     return (
         <main>
             <Router>
-                <TaskList path="/"/>
+                <Redirect from="/" to="/tasks" noThrow/>
+                <TaskList path="/tasks"/>
+                <TaskDetails path="/tasks/:id"/>
             </Router>
         </main>
     );
