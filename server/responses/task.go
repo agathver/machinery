@@ -33,3 +33,9 @@ type Choice struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 }
+
+type Result struct {
+	StatusCode int    `json:"statusCode"`
+	Output     string `json:"output"`
+	Error      string `json:"error"`
+}

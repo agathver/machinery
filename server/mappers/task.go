@@ -1,6 +1,7 @@
 package mappers
 
 import (
+	"github.com/agathver/machinery/server/executors"
 	"github.com/agathver/machinery/server/responses"
 	"github.com/agathver/machinery/server/tasks"
 )
@@ -30,6 +31,13 @@ func TaskToTaskDetail(t tasks.Task) responses.TaskDetail {
 	}
 }
 
+func ResultToResponse(r executors.Result) responses.Result {
+	return responses.Result{
+		StatusCode: r.StatusCode,
+		Output:     r.Output,
+		Error:      r.Error,
+	}
+}
 func parametersToResponse(params []tasks.Parameters) []responses.Parameters {
 	parameterResponses := make([]responses.Parameters, 0)
 

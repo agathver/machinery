@@ -57,6 +57,6 @@ func (t TaskController) Execute(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, mappers.ResultToResponse(result))
 	return
 }
