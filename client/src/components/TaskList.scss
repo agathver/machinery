@@ -1,0 +1,18 @@
+@import "~bulma/bulma";
+
+.task-list-box {
+  padding: 0;
+  columns: 3;
+  column-gap: 0;
+
+  li {
+    padding: 1.25rem;
+    margin: 0;
+    border-top: 1px solid $border;
+    border-right: 1px solid $border;
+
+    &:nth-child(n + 3) {
+      border-right: none;
+    }
+  }
+}
