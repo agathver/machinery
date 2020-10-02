@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {RouteComponentProps} from "@reach/router";
 import useAsync, {Status} from "../hooks/useAsync";
-import {executeTask, getTask, Result, Task} from "../client";
+import {executeTask, getTask} from "../client";
 import ParameterForm from "./ParameterForm";
 
 type TaskDetailsProps = RouteComponentProps & {
@@ -9,9 +9,9 @@ type TaskDetailsProps = RouteComponentProps & {
 }
 
 export function TaskDetails({id}: TaskDetailsProps) {
-    const {execute: load, value: task} = useAsync<Task, string>(getTask)
+    const {execute: load, value: task} = useAsync(getTask)
 
-    const {execute: execute, value: result, status} = useAsync<Result, string>(executeTask)
+    const {execute, value: result, status} = useAsync(executeTask)
 
     useEffect(() => {
         (async () => {
@@ -24,19 +24,10 @@ export function TaskDetails({id}: TaskDetailsProps) {
             <h1 className="title">{task?.name}</h1>
             <p className="subtitle">{task?.description}</p>
 
-            {task?.parameters?.length ?
-                <ParameterForm parameters={task.parameters!}/>
-                : <div className="message">
-                    <p className="message-body">This task has no parameters</p>
-                </div>}
-
-            <div className="field">
-                <div className="control">
-                    <div className="control">
-                        <button onClick={() => execute(id!)} className="button is-success">Execute</button>
-                    </div>
-                </div>
-            </div>
+            {task && <ParameterForm parameters={task.parameters} onSubmit={params => {
+                console.log(params);
+                (async () => execute({id: id!, params}))()
+            }}/>}
 
             {status === Status.Success &&
             <div className="message is-success">

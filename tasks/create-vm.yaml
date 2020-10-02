@@ -18,9 +18,9 @@ parameters:
         name: 'C5 Large'
         description: 'C5 Large compute-optimized'
   - id: 'host'
-    name: 'Port'
+    name: 'Host'
     description: 'DNS Name'
     required: false
     type: 'string'
-    pattern: '^(?:[[:alnum:]][[:alnum:]\-]*[[:alnum:]]\.?)+$'
+    pattern: '^(?:[a-zA-Z\d][a-zA-Z\d\-]*[a-zA-Z\d]\.?)+$'
     error_message: 'Provide a valid DNS name'
