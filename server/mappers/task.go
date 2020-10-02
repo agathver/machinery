@@ -1,9 +1,9 @@
 package mappers
 
 import (
-	"github.com/agathver/machinery/server/executors"
-	"github.com/agathver/machinery/server/responses"
-	"github.com/agathver/machinery/server/tasks"
+	"github.com/kinematic-ci/machinery/server/executors"
+	"github.com/kinematic-ci/machinery/server/responses"
+	"github.com/kinematic-ci/machinery/server/tasks"
 )
 
 func TasksToResponse(t []tasks.Task) responses.TaskList {

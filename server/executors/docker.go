@@ -3,11 +3,11 @@ package executors
 import (
 	"context"
 	"fmt"
-	"github.com/agathver/machinery/server/tasks"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/kinematic-ci/machinery/server/tasks"
 	"github.com/pkg/errors"
 	"io/ioutil"
 	"time"
@@ -53,11 +53,11 @@ func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, e
 	containerID := createdContainer.ID
 
 	response, err := e.client.ContainerAttach(ctx, containerID, types.ContainerAttachOptions{
-		Stream:     true,
-		Stdin:      false,
-		Stdout:     true,
-		Stderr:     true,
-		Logs:       true,
+		Stream: true,
+		Stdin:  false,
+		Stdout: true,
+		Stderr: true,
+		Logs:   true,
 	})
 	if err != nil {
 		return Result{}, errors.Wrap(err, "error attaching to container")

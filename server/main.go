@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/agathver/machinery/server/config"
-	"github.com/agathver/machinery/server/controllers"
-	"github.com/agathver/machinery/server/executors"
-	"github.com/agathver/machinery/server/tasks"
-	"github.com/agathver/machinery/server/utils"
 	docker "github.com/docker/docker/client"
 	"github.com/gin-gonic/gin"
+	"github.com/kinematic-ci/machinery/server/config"
+	"github.com/kinematic-ci/machinery/server/controllers"
+	"github.com/kinematic-ci/machinery/server/executors"
+	"github.com/kinematic-ci/machinery/server/tasks"
+	"github.com/kinematic-ci/machinery/server/utils"
 	"github.com/pkg/errors"
 )
 

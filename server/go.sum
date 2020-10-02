@@ -2,6 +2,9 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Microsoft/go-winio v0.4.14 h1:+hMXMk01us9KgxGb7ftKQt2Xpf5hH/yky+TDA+qxleU=
 github.com/Microsoft/go-winio v0.4.14/go.mod h1:qXqCSQ3Xa7+6tgxaGTIe4Kpcdsi+P8jBhyzoq1bpyYA=
+github.com/kinematic-ci/machinery v0.0.0-20201002062041-2fb38fc10be4 h1:zb8ZPLaUxOd9rl9DmzUrzKFJ3a8KnWcCLP24fvOQOZU=
+github.com/kinematic-ci/machinery/server v0.0.0-20201002062041-2fb38fc10be4 h1:dDjpk5PJEBS3+3bDlU4tDdlosI1ZeD1KVAJ8JMS63+g=
+github.com/kinematic-ci/machinery/server v0.0.0-20201002062041-2fb38fc10be4/go.mod h1:2Qs4UM0K/E4taM+GKGB6QZo6TWdFkGAeIE5FKuoBQco=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=

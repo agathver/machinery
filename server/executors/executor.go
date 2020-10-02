@@ -2,7 +2,7 @@ package executors
 
 import (
 	"context"
-	"github.com/agathver/machinery/server/tasks"
+	"github.com/kinematic-ci/machinery/server/tasks"
 )
 
 type Result struct {

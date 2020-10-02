@@ -1,4 +1,4 @@
-module github.com/agathver/machinery/server
+module github.com/kinematic-ci/machinery/server
 
 go 1.15
 

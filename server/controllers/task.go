@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"github.com/agathver/machinery/server/executors"
-	"github.com/agathver/machinery/server/mappers"
-	"github.com/agathver/machinery/server/responses"
-	"github.com/agathver/machinery/server/tasks"
 	"github.com/gin-gonic/gin"
+	"github.com/kinematic-ci/machinery/server/executors"
+	"github.com/kinematic-ci/machinery/server/mappers"
+	"github.com/kinematic-ci/machinery/server/responses"
+	"github.com/kinematic-ci/machinery/server/tasks"
 	"net/http"
 )
 
