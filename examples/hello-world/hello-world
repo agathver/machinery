@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo " _   _        _  _          _    _               _      _ "
+echo "| | | |      | || |        | |  | |             | |    | |"
+echo "| |_| |  ___ | || |  ___   | |  | |  ___   _ __ | |  __| |"
+echo "|  _  | / _ \| || | / _ \  | |/\| | / _ \ | '__|| | / _\` |"
+echo "| | | ||  __/| || || (_) | \  /\  /| (_) || |   | || (_| |"
+echo "\_| |_/ \___||_||_| \___/   \/  \/  \___/ |_|   |_| \__,_|"
+echo "                                                          "
+echo "                                                          "
+
+echo "Hello World example command v$(cat /etc/hello-world/version.txt)"
+
+echo "Welcome $name"
+echo 'This script was invoked with some parameters'
+export

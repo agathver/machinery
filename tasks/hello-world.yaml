@@ -1,4 +1,8 @@
 id: 'hello-world'
 name: 'Hello World'
 description: 'Prints hello world'
-image: 'docker.io/library/hello-world:latest'
+image: 'docker.io/kinematic-ci/hello-world:latest'
+parameters:
+  - name: 'Name'
+    id: 'name'
+    type: 'string'

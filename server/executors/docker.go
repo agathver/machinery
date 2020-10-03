@@ -26,19 +26,18 @@ func NewDockerExecutor(client *client.Client) *DockerExecutor {
 func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, error) {
 	image := task.Image
 
-	err := e.pullImage(ctx, image)
+	_, _, err := e.client.ImageInspectWithRaw(ctx, image)
 
-	if err != nil {
-		return Result{}, errors.Wrap(err, "cannot pull docker image")
+	if client.IsErrNotFound(err) {
+		err := e.pullImage(ctx, image)
+
+		if err != nil {
+			return Result{}, errors.Wrap(err, "cannot pull docker image")
+		}
 	}
 
 	containerName := fmt.Sprintf("%s-%d", task.Id, time.Now().Unix())
-
-	createdContainer, err := e.client.ContainerCreate(ctx,
-		&container.Config{Image: image},
-		&container.HostConfig{},
-		&network.NetworkingConfig{},
-		containerName)
+	createdContainer, err := e.createContainer(ctx, image, containerName)
 
 	if err != nil {
 		return Result{}, errors.Wrap(err, "error creating container")
@@ -80,6 +79,15 @@ func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, e
 		Output:     string(output),
 		Error:      result.State.Error,
 	}, nil
+}
+
+func (e DockerExecutor) createContainer(ctx context.Context, image string, containerName string) (container.ContainerCreateCreatedBody, error) {
+	createdContainer, err := e.client.ContainerCreate(ctx,
+		&container.Config{Image: image},
+		&container.HostConfig{},
+		&network.NetworkingConfig{},
+		containerName)
+	return createdContainer, err
 }
 
 func (e DockerExecutor) pullImage(ctx context.Context, image string) error {
