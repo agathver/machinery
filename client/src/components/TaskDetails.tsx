@@ -30,13 +30,13 @@ export function TaskDetails({id}: TaskDetailsProps) {
             }}/>}
 
             {status === Status.Success &&
-            <div className="message is-success">
+            <div className="message is-success mt-5">
                 <div className="message-header">Task executed successfully</div>
                 <pre className="message-body">{result?.output}</pre>
             </div>}
 
             {status === Status.Error &&
-            <div className="message is-danger">
+            <div className="message is-danger mt-5">
                 <div className="message-header">Task failed: exit code {result?.statusCode}</div>
                 <div className="message-body">
                     <pre>{result?.output}</pre>
