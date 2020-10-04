@@ -23,12 +23,16 @@ func NewDockerExecutor(client *client.Client) *DockerExecutor {
 	return &DockerExecutor{client: client}
 }
 
-func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, error) {
+func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task, parameters []string) (Result, error) {
 	image := task.Image
 
-	_, _, err := e.client.ImageInspectWithRaw(ctx, image)
+	exists, err := e.imageExists(ctx, image)
 
-	if client.IsErrNotFound(err) {
+	if err != nil {
+		return Result{}, errors.Wrap(err, "error checking for image existence")
+	}
+
+	if !exists {
 		err := e.pullImage(ctx, image)
 
 		if err != nil {
@@ -36,8 +40,10 @@ func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, e
 		}
 	}
 
+	envVars := append(task.EnvVars, parameters...)
+
 	containerName := fmt.Sprintf("%s-%d", task.Id, time.Now().Unix())
-	createdContainer, err := e.createContainer(ctx, image, containerName)
+	createdContainer, err := e.createContainer(ctx, image, containerName, envVars)
 
 	if err != nil {
 		return Result{}, errors.Wrap(err, "error creating container")
@@ -81,9 +87,23 @@ func (e DockerExecutor) Execute(ctx context.Context, task tasks.Task) (Result, e
 	}, nil
 }
 
-func (e DockerExecutor) createContainer(ctx context.Context, image string, containerName string) (container.ContainerCreateCreatedBody, error) {
+func (e DockerExecutor) imageExists(ctx context.Context, image string) (bool, error) {
+	_, _, err := e.client.ImageInspectWithRaw(ctx, image)
+
+	if client.IsErrNotFound(err) {
+		return true, nil
+	}
+
+	if err != nil {
+		return false, errors.Wrap(err, "error inspecting image")
+	}
+
+	return false, nil
+}
+
+func (e DockerExecutor) createContainer(ctx context.Context, image string, containerName string, vars []string) (container.ContainerCreateCreatedBody, error) {
 	createdContainer, err := e.client.ContainerCreate(ctx,
-		&container.Config{Image: image},
+		&container.Config{Image: image, Env: vars},
 		&container.HostConfig{},
 		&network.NetworkingConfig{},
 		containerName)

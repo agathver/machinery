@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/kinematic-ci/machinery/server/executors"
 	"github.com/kinematic-ci/machinery/server/mappers"
@@ -50,7 +51,15 @@ func (t TaskController) Execute(c *gin.Context) {
 		return
 	}
 
-	result, err := t.executor.Execute(c, task)
+	var executeArgs gin.H
+
+	err := c.BindJSON(&executeArgs)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, responses.BadRequest)
+	}
+
+	result, err := t.executor.Execute(c, task, makeParams(executeArgs))
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, responses.Error{Message: err.Error()})
@@ -59,4 +68,14 @@ func (t TaskController) Execute(c *gin.Context) {
 
 	c.JSON(http.StatusOK, mappers.ResultToResponse(result))
 	return
+}
+
+func makeParams(args gin.H) []string {
+	params := make([]string,0, len(args))
+
+	for k, v := range args {
+		params = append(params, fmt.Sprintf("%s=%s", k, v))
+	}
+
+	return params
 }

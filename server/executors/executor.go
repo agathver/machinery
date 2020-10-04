@@ -12,5 +12,5 @@ type Result struct {
 }
 
 type Executor interface {
-	Execute(ctx context.Context, task tasks.Task) (Result, error)
+	Execute(ctx context.Context, task tasks.Task, parameters []string) (Result, error)
 }

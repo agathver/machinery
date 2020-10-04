@@ -1,7 +1,7 @@
 package responses
 
 type Error struct {
-	Message string
+	Message string `json:"message"`
 }
 
 func (e Error) Error() string {
@@ -10,6 +10,12 @@ func (e Error) Error() string {
 
 var _ error = Error{}
 
-var NotFound = Error{
-	Message: "Not found",
-}
+var (
+	NotFound = Error{
+		Message: "Not found",
+	}
+
+	BadRequest = Error{
+		Message: "Bad request",
+	}
+)
