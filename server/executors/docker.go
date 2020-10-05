@@ -91,14 +91,14 @@ func (e DockerExecutor) imageExists(ctx context.Context, image string) (bool, er
 	_, _, err := e.client.ImageInspectWithRaw(ctx, image)
 
 	if client.IsErrNotFound(err) {
-		return true, nil
+		return false, nil
 	}
 
 	if err != nil {
-		return false, errors.Wrap(err, "error inspecting image")
+		return false, errors.WithStack(err)
 	}
 
-	return false, nil
+	return true, nil
 }
 
 func (e DockerExecutor) createContainer(ctx context.Context, image string, containerName string, vars []string) (container.ContainerCreateCreatedBody, error) {
@@ -113,7 +113,7 @@ func (e DockerExecutor) createContainer(ctx context.Context, image string, conta
 func (e DockerExecutor) pullImage(ctx context.Context, image string) error {
 	_, err := e.client.ImagePull(ctx, image, types.ImagePullOptions{})
 	if err != nil {
-		return errors.Wrap(err, "cannot pull image from registry")
+		return errors.WithStack(err)
 	}
 	return nil
 }
