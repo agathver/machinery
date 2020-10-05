@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Parameter, ParameterValues} from "../client";
+import {Parameter, ParameterValues} from "../lib/client";
 
 
 type SubmitHandler = (_: ParameterValues) => void

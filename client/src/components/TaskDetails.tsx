@@ -1,17 +1,26 @@
 import React, {useEffect} from 'react'
 import {RouteComponentProps} from "@reach/router";
 import useAsync, {Status} from "../hooks/useAsync";
-import {executeTask, getTask} from "../client";
+import {executeTask, getTask} from "../lib/client";
 import ParameterForm from "./ParameterForm";
 
 type TaskDetailsProps = RouteComponentProps & {
     id?: string
 }
 
+function renderError(error: Error) {
+    return <div className="message is-danger mt-5">
+        <div className="message-header">Task failed</div>
+        <div className="message-body">
+            <p>{error.message}</p>
+        </div>
+    </div>;
+}
+
 export function TaskDetails({id}: TaskDetailsProps) {
     const {execute: load, value: task} = useAsync(getTask)
 
-    const {execute, value: result, status} = useAsync(executeTask)
+    const {execute, value: result, status, error} = useAsync(executeTask)
 
     useEffect(() => {
         (async () => {
@@ -35,13 +44,6 @@ export function TaskDetails({id}: TaskDetailsProps) {
                 <pre className="message-body">{result?.output}</pre>
             </div>}
 
-            {status === Status.Error &&
-            <div className="message is-danger mt-5">
-                <div className="message-header">Task failed: exit code {result?.statusCode}</div>
-                <div className="message-body">
-                    <pre>{result?.output}</pre>
-                    <pre>{result?.error}</pre>
-                </div>
-            </div>}
+            {status === Status.Error && renderError(error)}
         </div>)
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
 import useAsync from "../hooks/useAsync";
 import {Link, RouteComponentProps} from "@reach/router";
-import {ListTaskResponse, listTasks} from "../client";
+import {ListTaskResponse, listTasks} from "../lib/client";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import Fuse from "fuse.js"

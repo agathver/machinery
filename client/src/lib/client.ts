@@ -1,3 +1,6 @@
+import axios from "axios";
+import {handleError} from "./errors";
+
 type Choice = {
     readonly value: string,
     readonly name: string,
@@ -37,28 +40,29 @@ export type Result = {
     readonly error: string
 }
 
-function get(url: string) {
-    return fetch(url).then(r => r.json());
-}
-
-function post(url: string, params: ParameterValues | undefined) {
-    return fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: params ? JSON.stringify(params) : undefined
-    }).then(r => r.json());
-}
-
 export async function listTasks(): Promise<ListTaskResponse> {
-    return get('/v1/tasks')
+    try {
+        const r = await axios.get('/v1/tasks');
+        return r.data;
+    } catch (error) {
+        return handleError(error);
+    }
 }
 
 export async function getTask(id: string): Promise<Task> {
-    return get(`/v1/tasks/${id}`)
+    try {
+        let response = await axios.get(`/v1/tasks/${id}`);
+        return response.data;
+    } catch (error) {
+        return handleError(error);
+    }
 }
 
 export async function executeTask({id, params}: { id: string, params?: ParameterValues }): Promise<Result> {
-    return post(`/v1/tasks/${id}/execute`, params)
+    try {
+        let response = await axios.post(`/v1/tasks/${id}/execute`, params);
+        return response.data;
+    } catch (error) {
+        return handleError(error);
+    }
 }

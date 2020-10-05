@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Redirect, Router} from "@reach/router";
-import TaskList from "./components/TaskList";
-import {TaskDetails} from "./components/TaskDetails";
+import TaskList from "./TaskList";
+import {TaskDetails} from "./TaskDetails";
 
 
 function App() {
